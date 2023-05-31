@@ -119,7 +119,8 @@ Apresenta a totalização do credit, debit e total, exclusivamente para o dia in
 - **NodeJS**: Ambiente de tempo de execução de código aberto baseado no motor JavaScript V8 do Google Chrome. Ele permite que você execute JavaScript no lado do servidor.
 - **NPM**: Node Package Manager é o gerenciador de pacotes padrão para o ecossistema do Node.js. Ele permite que os desenvolvedores instalem, gerenciem e compartilhem pacotes de código reutilizáveis ​​(módulos) para seus projetos.
 - **Jest**: Framework de teste de código aberto para JavaScript, projetado principalmente para testar aplicativos e bibliotecas do Node.js.
-- **winston**: Biblioteca de registro (logging) para o Node.js. Ela fornece uma interface flexível e extensível para registrar mensagens e eventos em seus aplicativos Node.js.
+- **winston**: Biblioteca de registro (logging) para o Node.js. Ela fornece uma interface flexível e extensível para registrar mensagens e eventos nos aplicativos Node.js.
+- **Nodemon**: É uma ferramenta muito que agiliza o desenvolvimento, pois economiza tempo e esforço ao automatizar o processo de reinicialização do servidor sempre que necessário.
 
 <br>
 
@@ -131,7 +132,7 @@ Passo 1: Clone o projeto. Na sua pasta de projetos execute o seguinte comando.
 git clone https://github.com/martinmoraes/sfc.git
 ```
 
-Passo 2: Instale as dependências. Na pasta raiz do projeto, execute o seguinte comando.
+Passo 2: Instale as dependências. Na pasta raiz do projeto, execute os seguintes comando.
 
 ```
 cd sfc
@@ -140,15 +141,29 @@ npm install
 
 ## Execução em modo de produção
 
-Iniciar a aplicação. É necessário ter instalado o Docker e Docker-compose. Ainda na pasta raiz do projeto execute o seguinte comando.
+Passo 1: Iniciar a aplicação - Ainda na pasta raiz do projeto execute o comando abaixo.
+
+Obs.:
+
+- É necessário ter instalado o Docker e Docker-compose.
+- Certifique-se que nenhum serviço ou container esteja utilizando as portas 3001 e 27017.
+- Se estiver executando o Docker da seção "Execução em modo desenvolvimento", execute o passo 5 da referida seção.
 
 ```
 docker-compose up -d
 ```
 
+Passo 2: Parar a aplicação - Para parar a aplicação, estando na pasta raiz do projeto execute o seguinte comando.
+
+```
+docker-compose stop
+```
+
 ## Execução em modo desenvolvimento
 
 Passo 1: Criar o arquivo .env, na raiz do projeto, com o seguinte conteudo
+
+P.S.: A variável de ambiente "LOG_DIR" deve conter o path completo para a pasta "log".
 
 ```
 APP_PORT=3001
@@ -160,7 +175,13 @@ MONGO_POOLSIZE=5
 LOG_DIR=~/log
 ```
 
-Passo 2: MongoDB em Docker - Para executar o MongoDB em um Docker, execute o seguinte comando:
+Passo 2: MongoDB em Docker - Para executar o MongoDB em um Docker, execute o comando abaixo.
+
+Obs.:
+
+- É necessário ter instalado o Docker e Docker-compose.
+- Certifique-se que nenhum serviço ou container esteja utilizando as portas 3001 e 27017.
+- Se estiver executando o Docker-compose da seção "Execução em modo de produção" execute o "Passo 2: Parar a aplicação", da referida seção.
 
 ```
 docker run -d --rm --name mongodb \
@@ -171,10 +192,26 @@ docker run -d --rm --name mongodb \
 	mongo:6.0.6
 ```
 
-Passo 2: Rodar o projeto - Certifique-se de estar na pasta raiz do projeto e execute o seguinte comando.
+Passo 3: Rodar o projeto - Certifique-se de estar na pasta raiz do projeto e execute o seguinte comando.
 
 ```
 npm run start:dev
+```
+
+Passo 4: Parar a aplicação - Para parar a aplicação execute o seguinte comando no console em que estiver rodando a aplicação (nodemon).
+
+```
+Ctrl + C
+
+ou
+
+Command + C
+```
+
+Passo 5: Parar o container - Para parar o container do MongoDB execute o seguinte comando.
+
+```
+docker stop mongodb
 ```
 
 ## Postman: Testar os endpoint
