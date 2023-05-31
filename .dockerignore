@@ -1,0 +1,17 @@
+.git
+.gitignore
+.nvmrc
+.env
+.husky
+.eslintrc.js
+.prettierrc
+docker-compose.yml
+Dockerfile
+mongodb.docker
+*.md
+test
+node_modules
+log
+coverage
+README.md
+sfc.png
