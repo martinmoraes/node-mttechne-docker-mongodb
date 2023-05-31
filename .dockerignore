@@ -7,7 +7,6 @@
 .prettierrc
 docker-compose.yml
 Dockerfile
-mongodb.docker
 *.md
 test
 node_modules
