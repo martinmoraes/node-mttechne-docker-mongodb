@@ -4,16 +4,13 @@ const Decimal = require('decimal.js');
 const consolidate = (transactions) => {
   const consolidated = transactions.reduce(
     (accumulated, current) => {
-      accumulated.credit = accumulated.credit.plus(
-        current.operation === Operation.CREDIT ? current.value : 0,
-      );
-      accumulated.debit = accumulated.debit.plus(current.operation === Operation.DEBIT ? current.value : 0);
-
       if (current.operation === Operation.CREDIT) {
+        accumulated.credit = accumulated.credit.plus(current.value);
         accumulated.total = accumulated.total.plus(current.value);
       }
 
       if (current.operation === Operation.DEBIT) {
+        accumulated.debit = accumulated.debit.plus(current.value);
         accumulated.total = accumulated.total.minus(current.value);
       }
 

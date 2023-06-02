@@ -1,7 +1,7 @@
 const { Validator } = require('node-input-validator');
 const { consolidate } = require('./common.service');
 
-const getConsolidatedOnDayTransactions = async (httpResponse, transactionRepository, day) => {
+const getTransactedOnDayTransactions = async (httpResponse, transactionRepository, day) => {
   try {
     const validationErrors = await validate({ day });
 
@@ -43,4 +43,4 @@ const validate = async (payload) => {
   }
 };
 
-module.exports = { getConsolidatedOnDayTransactions };
+module.exports = { getTransactedOnDayTransactions };

@@ -3,7 +3,7 @@ const { getTransactions } = require('./get_transactions.service');
 const { getConsolidatedTransactions } = require('./get_consolidated_transactions.service');
 const { getDailyConsolidatedTransactions } = require('./get_daily_consolidated_transactions.service');
 const { getDailyTransactedTransactions } = require('./get_daily_transacted_transactions.service');
-const { getConsolidatedOnDayTransactions } = require('./get_consolidated_on_day_transactions.service');
+const { getTransactedOnDayTransactions } = require('./get_transacted_on_day_transactions.service');
 const { HttpResponse } = require('../http_response');
 const { TransactionRepository } = require('./transaction.repository');
 
@@ -38,11 +38,7 @@ const registerRoutes = (app) => {
   });
 
   app.get('/transaction/transacted/on-day/:day?', async (req, res) => {
-    return getConsolidatedOnDayTransactions(
-      new HttpResponse(res),
-      new TransactionRepository(),
-      req.params.day,
-    );
+    return getTransactedOnDayTransactions(new HttpResponse(res), new TransactionRepository(), req.params.day);
   });
 };
 

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {
-  getConsolidatedOnDayTransactions,
-} = require('../../../src/api/transaction/get_consolidated_on_day_transactions.service');
+  getTransactedOnDayTransactions,
+} = require('../../../src/api/transaction/get_transacted_on_day_transactions.service');
 const { HttpResponseMock } = require('../mock/http_reponse.mock');
 const { TransactionRepositoryMock } = require('../mock/transaction.repository.mock');
 
@@ -13,7 +13,7 @@ describe('Get Consolidated On Day Transactions', () => {
   describe('validate day', () => {
     it('without param day', async () => {
       const day = undefined;
-      const result = await getConsolidatedOnDayTransactions(
+      const result = await getTransactedOnDayTransactions(
         HttpResponseMock,
         new TransactionRepositoryMock(),
         day,
@@ -28,7 +28,7 @@ describe('Get Consolidated On Day Transactions', () => {
 
     it('invalid param day', async () => {
       const day = '12-12-12';
-      const result = await getConsolidatedOnDayTransactions(
+      const result = await getTransactedOnDayTransactions(
         HttpResponseMock,
         new TransactionRepositoryMock(),
         day,
@@ -46,7 +46,7 @@ describe('Get Consolidated On Day Transactions', () => {
     const transactionRepository = new TransactionRepositoryMock();
     const spyTransactionRepository = jest.spyOn(transactionRepository, 'findOnDay');
     const day = '2023-04-25';
-    const result = await getConsolidatedOnDayTransactions(HttpResponseMock, transactionRepository, day);
+    const result = await getTransactedOnDayTransactions(HttpResponseMock, transactionRepository, day);
 
     expect(result.statusCode).toEqual(200);
     let actualParameters = HttpResponseMock.ok.mock.calls[0][0];
@@ -64,7 +64,7 @@ describe('Get Consolidated On Day Transactions', () => {
       });
 
     const day = '2023-04-25';
-    const result = await getConsolidatedOnDayTransactions(HttpResponseMock, transactionRepositoryMock, day);
+    const result = await getTransactedOnDayTransactions(HttpResponseMock, transactionRepositoryMock, day);
 
     expect(result.statusCode).toEqual(500);
     const actualParameters = HttpResponseMock.internalError.mock.calls[0][0];
